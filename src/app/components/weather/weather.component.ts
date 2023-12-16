@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { environment } from '../../../environments/environments';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-weather',
