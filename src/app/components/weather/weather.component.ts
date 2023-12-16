@@ -2,19 +2,19 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-
-const baseUrl = 'http://api.openweathermap.org/data/2.5/weather';
-const apiKey = '633c0626a2aaa15575ea07f74a6ac713'
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule  ],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule,  ],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.css'
 })
 export class WeatherComponent {
+
+  baseUrl: string = environment.baseUrl;
+  apiKey: string = environment.apiKey;
 
   formWeather: FormGroup;
   data: any;
@@ -30,7 +30,7 @@ export class WeatherComponent {
   }
 
   getWeather(city: string){
-    const url = `${baseUrl}?q=${city}&appid=${apiKey}`;
+    const url = `${this.baseUrl}?q=${city}&appid=${this.apiKey}`;
 
     return this.httpClient.get(url);
   }
