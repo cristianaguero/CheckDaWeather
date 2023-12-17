@@ -19,6 +19,9 @@ export class WeatherComponent {
   formWeather: FormGroup;
   data: any;
 
+  showError: boolean = false;
+  msgError: string = '';
+
   constructor(private form: FormBuilder, private httpClient: HttpClient ) {
     this.formWeather = this.form.group({
       city: ['', Validators.required]
@@ -44,6 +47,8 @@ export class WeatherComponent {
     this.getWeather(this.formWeather.controls['city'].value).subscribe({
       next: (result: any) => {
       
+        this.showError = false;
+        
         this.data = result;
 
         let temp = this.data.main.temp;
@@ -67,8 +72,9 @@ export class WeatherComponent {
         this.data.main.feels_like = feels_like;
         
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.showError = true;
+        this.msgError = 'City not found'
       }
     });
 

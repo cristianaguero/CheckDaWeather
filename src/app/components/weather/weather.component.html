@@ -5,6 +5,10 @@
             <h2 class="text-white text-2xl mb-1 font-medium title-font">Are you wondering how the weather is?</h2>
             <p class="leading-relaxed mb-5">Check by</p>
             <form [formGroup]="formWeather" (ngSubmit)="checkWeather()">
+                
+                @if (showError) {
+                    <div class="p-3 bg-pink-600 text-white rounded my-2 text-center">{{msgError}}</div>
+                    }
 
                 @if (checkValidation('city', 'required'))
                 {<div class="p-3 bg-pink-600 text-white rounded my-2 text-center">Please, enter a city</div>}
